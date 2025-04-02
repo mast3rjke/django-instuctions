@@ -7,19 +7,44 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Первый сайт на Django | {{ title }}</title>
+    <link rel="stylesheet" href="{% static 'app_1/vars.css' %}">
     <link rel="stylesheet" href="{% static 'app_1/main.css' %}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+          integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"
+    />
     {% block custom_css %}
     {% endblock %}
+    {% csrf_token %}
 </head>
 <body>
+    <header>
+        <div class="app-logo">
+            <i class="fa-solid fa-film"></i>
+            <h1>MyFirstFilmApp</h1>
+        </div>
+        <div class="auth-state">
+            {% if user.is_authenticated %}
+                <a class="auth-logout base-button" id="logout">Выйти</a>
+            {% else %}
+                <a class="auth-register base-button" href="/">Регистрация</a>
+                <a class="auth-login base-button" href="/admin/login/">Вход</a>
+            {% endif %}
+        </div>
+    </header>
     <nav>
         <ol>
             <li><a href="{% url 'app-main' %}">Главная</a></li>
             <li><a href="{% url 'app-about' %}">О нас</a></li>
+            <li><a href="{% url 'app-genres' %}">Жанры</a></li>
         </ol>
     </nav>
+    <main>
     {% block content %}
     {% endblock %}
+    </main>
     <script src="{% static 'app_1/main.js' %}"></script>
     {% block custom_js %}
     {% endblock %}
