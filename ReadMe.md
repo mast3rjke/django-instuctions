@@ -149,3 +149,171 @@ python manage.py runserver
     ```
 Используется когда нужно отобразить одну и ту же верстку несколько раз
 
+### Наследование шаблонов
+
+**Родительский шаблон** - базовая верстка страницы или повторяющегося 
+элемента, с возможностью изменения части содержимого.
+
+**Дочерний шаблон** - шаблон, расширяющий содержимое базового шаблона.
+
+В родительском шаблоне изменяющаяся часть создается директивой:
+```html
+{% block <название_блока> %}
+
+{% endblock %}
+```
+
+Код дочернего элемента:
+```html
+{% extends <путь_к_базовому_шаблону> %}
+    
+{% block <название_блока_родителя> %}
+    // Содержимое блока
+{% endblock %}
+```
+
+# Подключение к БД
+
+Для настройки подключения к БД необходимо в папке менеджера приложений
+в файле ```settings.py``` заменить переменную ```DATABASES``` на:
+```python
+DATABASES = {
+    'default': {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": <название_бд>,
+        "USER": <имя_пользователя>,
+        "PASSWORD": <пароль_пользователя>,
+        "HOST": "localhost",
+        "PORT": "5432"
+    }
+}
+```
+
+Далее установить ```psycopg2```:
+```bash
+pip install psycopg2
+```
+
+Затем применить базовые миграции: 
+```bash
+python manage.py migrate
+```
+
+**Миграция (migration)** - это файл с декларативным описанием 
+объекта БД (таблицы).
+**Мигрирование (migrate)** - это процесс перевода миграции 
+в реальный объект БД
+
+# Создание супер пользователя
+
+После применения миграций можно создать супер пользователя командой:
+```bash
+python manage.py createsuperuser
+```
+ и следовать инструкциям
+
+ > При вводе пароля символы не отображаются!
+ 
+Для сброса пароля пользователя используется команда:
+```bash
+python manage.py changepassword <имя_пользователя>
+```
+
+
+# Русский в админке
+
+Для включения русского языка в админке Django необходимо 
+в файле ```settings.py``` заменить переменную ```LANGUAGE_CODE``` на:
+```python
+LANGUAGE_CODE = 'ru-ru'
+```
+
+
+# Создание собственных моделей и миграций
+
+В папке приложения в файле ```models.py``` создаются собственные модели.
+
+Шаблон модели:
+```python
+from django.db import models
+
+
+class <НазваниеМодели>(models.Model):
+    <название_колонки> = models.<ТипПоля>([параметры_поля])
+    ...
+    
+    def __str__(self) -> str:
+        """Для красивого вывода в админке"""
+        return self.<свойство класса> # может вычисляться
+```
+
+Пример:
+```python
+from django.db import models
+
+
+# Create your models here.
+class Genre(models.Model):
+    name = models.CharField(max_length=30)
+
+    def __str__(self) -> str:
+        return self.name
+
+
+class Director(models.Model):
+    first_name = models.CharField(max_length=30)
+    second_name = models.CharField(max_length=30, null=True)
+    last_name = models.CharField(max_length=30)
+    
+    def __str__(self) -> str:
+        director_item_name: str = f"{self.last_name} {self.first_name}"
+
+        if self.second_name:
+            director_item_name += f" {self.second_name}"
+
+        return director_item_name
+
+
+class Film(models.Model):
+    name = models.CharField(max_length=30)
+    descriptions = models.TextField(null=True)
+    genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
+    director = models.ForeignKey(
+        Director, on_delete=models.SET_NULL, null=True
+    )
+
+    def __str__(self) -> str:
+        return self.name
+
+```
+
+Далее в терминале выполнется команда:
+```bash
+python manage.py makemigrations
+```
+
+Она создаст в папке приложения папку ```migrations``` с миграциями.
+Для их применения нужно выполнить команду:
+```bash
+python manage.py migrate 
+```
+
+> ВАЖНО! При создании миграций необходимо изменять только одну сущность - 
+> создание 1 таблицы, изменение колонок 1 таблицы. 
+> Делается для того, чтобы не миксовать содержимое при откате
+
+## Регистрация модели в админке
+
+Для того, чтобы можно было редактировать и работать с собственными моделями
+в админке django необходимо в файле ```admin.py``` зарегистрировать 
+требуемые модели:
+
+```python
+from django.contrib import admin
+from <название_приложения> import models
+# Register your models here.
+
+admin.site.register(models.<НазваниеМодели>)
+```
+
+
