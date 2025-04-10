@@ -1,0 +1,12 @@
+<div class="app-films">
+    {% for film in films %}
+        <a
+            href="{% url 'app-film-view' film_id=film.id %}"
+            class="app-main-page__film app-pale"
+        >
+            <span>
+                {{ film.name }}
+            </span>
+        </a>
+    {% endfor %}
+</div>

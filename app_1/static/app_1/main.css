@@ -7,19 +7,33 @@
 
 body {
     background-color: var(--main_color);
+    height: 100vh;
+    flex-direction: column;
 }
 
 header {
     background-color: var(--additional_color);
     box-shadow: 0 2px 10px 0 grey;
-    display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+.app-flex {
+    display: flex;
+}
+
+.app-flex-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.app-full-size {
+    width: 100%;
+    height: 100%;
+}
+
 .app-logo {
     padding: 10px;
-    display: flex;
     align-items: center;
 }
 
@@ -31,10 +45,9 @@ header {
 
 .base-button {
     background-color: var(--primary_color);
-    display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 12px;
     text-decoration: none;
     color: aliceblue;
     font-weight: bold;
@@ -49,6 +62,56 @@ header {
 }
 
 .auth-state {
-    display: flex;
-    gap:5px;
+    gap: 5px;
+}
+
+.app-content {
+    height: 100%;
+}
+
+.app-content nav {
+    background-color: var(--info_color);
+    box-shadow: 0 2px 10px grey;
+}
+
+.app-content nav li a {
+    color: aliceblue;
+    text-decoration: none;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    background-color: var(--readonly_color);
+    transition: .3s;
+}
+
+.app-content nav li:not(:last-child) {
+    border-bottom: 1px solid black;
+}
+
+.app-content nav li a:hover {
+    background-color: purple;
+}
+
+main {
+    padding: 30px;
+}
+
+i.app-logo {
+    margin-left: 8px;
+}
+
+.app-pale {
+    border-radius: 14px;
+    background-color: var(--info_color);
+    color: aliceblue;
+    font-weight: bold;
+    transition: 0.3s;
+    padding: 8px;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.app-pale:hover {
+    box-shadow: 0 0 8px grey;
 }

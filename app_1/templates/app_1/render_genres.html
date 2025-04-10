@@ -1,0 +1,12 @@
+<div class="app-genres">
+    {% for genre in genres %}
+        <a
+            href="{% url 'app-genre-view' genre_id=genre.id %}"
+            class="app-main-page__film app-pale"
+        >
+            <span>
+                {{ genre.name }}
+            </span>
+        </a>
+    {% endfor %}
+</div>

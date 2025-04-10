@@ -1,0 +1,19 @@
+{% extends 'app_1/base.html' %}
+
+
+{% block content %}
+    {% if film %}
+        <div class="app-film">
+            <p><b>Название: </b>{{ film.name }}</p>
+            <p><b>Описание: </b>{{ film.descriptions }}</p>
+            <p><b>Режиссер: </b><a href="{% url 'app-director-view' director_id=film.director.id %}">{{ film.director.render_name }}</a></p>
+            <p><b>Жанр: </b><a href="{% url 'app-genre-view' genre_id=film.genre.id %}">{{ film.genre.name }}</a></p>
+        </div>
+    {% else %}
+        <div class="app-container-error app-flex app-flex-center app-full-size">
+            <span class="app-container-error__text">
+                Фильм по переданному идентификатору не найден
+            </span>
+        </div>
+    {% endif %}
+{% endblock %}

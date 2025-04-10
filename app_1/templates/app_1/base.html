@@ -19,32 +19,57 @@
     {% endblock %}
     {% csrf_token %}
 </head>
-<body>
-    <header>
-        <div class="app-logo">
+<body class="app-flex">
+    <header class="app-flex">
+        <div class="app-logo app-flex">
             <i class="fa-solid fa-film"></i>
             <h1>MyFirstFilmApp</h1>
         </div>
-        <div class="auth-state">
+        <div class="auth-state app-flex">
             {% if user.is_authenticated %}
-                <a class="auth-logout base-button" id="logout">Выйти</a>
+                <a class="auth-logout base-button app-flex" id="logout">
+                    <i class="app-logo fa fa-lock"></i>
+                    Выйти
+                </a>
             {% else %}
-                <a class="auth-register base-button" href="/">Регистрация</a>
-                <a class="auth-login base-button" href="/admin/login/">Вход</a>
+                <a class="auth-register base-button app-flex" href="/">
+                    <i class="app-logo fa fa-user-plus"></i>Регистрация
+                </a>
+                <a class="auth-login base-button app-flex" href="/admin/login/">
+                    <i class="app-logo fa fa-unlock"></i>
+                    Вход
+                </a>
             {% endif %}
         </div>
     </header>
-    <nav>
-        <ol>
-            <li><a href="{% url 'app-main' %}">Главная</a></li>
-            <li><a href="{% url 'app-about' %}">О нас</a></li>
-            <li><a href="{% url 'app-genres' %}">Жанры</a></li>
-        </ol>
-    </nav>
-    <main>
-    {% block content %}
-    {% endblock %}
-    </main>
+    <div class="app-content app-flex">
+        <nav>
+            <ol>
+                <li>
+                    <a class="app-flex" href="{% url 'app-main' %}">
+                        <i class="app-logo fa fa-home"></i>
+                        Главная
+                    </a>
+                </li>
+                <li>
+                    <a class="app-flex" href="{% url 'app-about' %}">
+                        <i class="app-logo fa fa-address-book"></i>
+                        О нас
+                    </a>
+                </li>
+                <li>
+                    <a class="app-flex" href="{% url 'app-genres' %}">
+                        <i class="app-logo fa fa-book"></i>
+                        Жанры
+                    </a>
+                </li>
+            </ol>
+        </nav>
+        <main class="app-full-size">
+        {% block content %}
+        {% endblock %}
+        </main>
+    </div>
     <script src="{% static 'app_1/main.js' %}"></script>
     {% block custom_js %}
     {% endblock %}

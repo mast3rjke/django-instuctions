@@ -1,5 +1,18 @@
 {% extends 'app_1/base.html' %}
 
 {% block content %}
-    <span>123</span>
+    <div class="app-page-main">
+        <div class="app-page-main__films">
+            <h2>Фильмы:</h2>
+            {% include 'app_1/render_films.html' %}
+        </div>
+        <div class="app-page-main__directors">
+            <h2>Режиссеры:</h2>
+            {% include 'app_1/render_directors.html' %}
+        </div>
+        <div class="app-page-main__genres">
+            <h2>Жанры:</h2>
+            {% include 'app_1/render_genres.html' %}
+        </div>
+    </div>
 {% endblock %}

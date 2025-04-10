@@ -315,5 +315,3 @@ from <название_приложения> import models
 
 admin.site.register(models.<НазваниеМодели>)
 ```
-
-

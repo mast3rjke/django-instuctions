@@ -1,0 +1,36 @@
+{% extends 'app_1/base.html' %}
+
+{% block custom_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app_1/genre.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% if genre %}
+        <div class="app-genre">
+            <p><b>Название жанра: </b>{{ genre.name }}</p>
+        </div>
+
+        {% if films %}
+            <hr>
+            <div class="app-genre__films">
+                <h2>Фильмы жанра:</h2>
+                {% include 'app_1/render_films.html' %}
+            </div>
+        {% endif %}
+
+        {% if directors %}
+            <hr>
+            <div class="app-genre__directors">
+                <h2>Режиссеры жанра:</h2>
+                {% include 'app_1/render_directors.html' %}
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="app-container-error app-flex app-flex-center app-full-size">
+            <span class="app-container-error__text">
+                Жанр по переданному идентификатору не найден
+            </span>
+        </div>
+    {% endif %}
+{% endblock %}

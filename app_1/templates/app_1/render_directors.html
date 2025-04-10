@@ -1,0 +1,10 @@
+<div class="app-directors">
+    {% for director in directors %}
+        <a
+            href="{% url 'app-director-view' director_id=director.id %}"
+            class="app-main-page__film app-pale"
+        >
+            <span>{{ director.render_name }}</span>
+        </a>
+    {% endfor %}
+</div>

@@ -1,0 +1,31 @@
+{% extends 'app_1/base.html' %}
+
+
+{% block content %}
+    {% if director %}
+        <div class="app-director">
+            <p><b>ФИО: </b>{{ director.render_name }}</p>
+        </div>
+        {% if films %}
+            <hr>
+            <div class="app-director__films">
+                <h2>Фильмы режиссера:</h2>
+                {% include 'app_1/render_films.html' %}
+            </div>
+        {% endif %}
+
+        {% if genres %}
+            <hr>
+            <div class="app-director__genres">
+                <h2>Жанры режиссера:</h2>
+                {% include 'app_1/render_genres.html' %}
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="app-container-error app-flex app-flex-center app-full-size">
+            <span class="app-container-error__text">
+                Режиссер по переданному идентификатору не найден
+            </span>
+        </div>
+    {% endif %}
+{% endblock %}
