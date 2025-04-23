@@ -6,6 +6,8 @@
         >
             <span>
                 {{ genre.name }}
+                <a href="{% url 'app-genre-edit' genre_id=genre.id %}"><i class="fa fa-pencil"></i></a>
+                <a href="{% url 'app-genre-delete' genre_id=genre.id %}"><i class="fa fa-trash"></i></a>
             </span>
         </a>
     {% endfor %}

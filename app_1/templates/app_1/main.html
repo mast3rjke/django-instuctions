@@ -3,15 +3,30 @@
 {% block content %}
     <div class="app-page-main">
         <div class="app-page-main__films">
-            <h2>Фильмы:</h2>
+            <h2 class="app-flex app-flex-justify-center app-mb-base">
+                <span>Фильмы:</span>
+                <a class="app-ml-base" href="{% url 'app-film-create' %}">
+                    <i class="fa fa-plus app-round-btn"></i>
+                </a>
+            </h2>
             {% include 'app_1/render_films.html' %}
         </div>
         <div class="app-page-main__directors">
-            <h2>Режиссеры:</h2>
+            <h2 class="app-flex app-flex-justify-center app-mt-base app-mb-base">
+                <span>Режиссеры:</span>
+                <a class="app-ml-base" href="{% url 'app-director-create' %}">
+                    <i class="fa fa-plus app-round-btn"></i>
+                </a>
+            </h2>
             {% include 'app_1/render_directors.html' %}
         </div>
         <div class="app-page-main__genres">
-            <h2>Жанры:</h2>
+            <h2 class="app-flex app-flex-justify-center  app-mt-base app-mb-base">
+                <span>Жанры:</span>
+                <a class="app-ml-base" href="{% url 'app-genre-create' %}">
+                    <i class="fa fa-plus app-round-btn"></i>
+                </a>
+            </h2>
             {% include 'app_1/render_genres.html' %}
         </div>
     </div>

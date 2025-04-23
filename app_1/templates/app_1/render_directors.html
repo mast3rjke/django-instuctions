@@ -5,6 +5,8 @@
             class="app-main-page__film app-pale"
         >
             <span>{{ director.render_name }}</span>
+            <a href="{% url 'app-director-edit' director_id=director.id %}"><i class="fa fa-pencil"></i></a>
+            <a href="{% url 'app-director-delete' director_id=director.id %}"><i class="fa fa-trash"></i></a>
         </a>
     {% endfor %}
 </div>

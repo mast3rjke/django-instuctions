@@ -27,15 +27,15 @@
         </div>
         <div class="auth-state app-flex">
             {% if user.is_authenticated %}
-                <a class="auth-logout base-button app-flex" id="logout">
+                <a class="auth-logout base-button app-flex" href="{% url 'app-logout' %}">
                     <i class="app-logo fa fa-lock"></i>
                     Выйти
                 </a>
             {% else %}
-                <a class="auth-register base-button app-flex" href="/">
+                <a class="auth-register base-button app-flex" href="{% url 'app-register' %}">
                     <i class="app-logo fa fa-user-plus"></i>Регистрация
                 </a>
-                <a class="auth-login base-button app-flex" href="/admin/login/">
+                <a class="auth-login base-button app-flex" href="{% url 'app-login' %}">
                     <i class="app-logo fa fa-unlock"></i>
                     Вход
                 </a>
@@ -49,18 +49,6 @@
                     <a class="app-flex" href="{% url 'app-main' %}">
                         <i class="app-logo fa fa-home"></i>
                         Главная
-                    </a>
-                </li>
-                <li>
-                    <a class="app-flex" href="{% url 'app-about' %}">
-                        <i class="app-logo fa fa-address-book"></i>
-                        О нас
-                    </a>
-                </li>
-                <li>
-                    <a class="app-flex" href="{% url 'app-genres' %}">
-                        <i class="app-logo fa fa-book"></i>
-                        Жанры
                     </a>
                 </li>
             </ol>

@@ -32,6 +32,34 @@ header {
     height: 100%;
 }
 
+.app-flex-baseline {
+    align-items: baseline;
+}
+
+.app-flex-justify-center {
+    align-items: center;
+}
+
+.app-mr-base {
+    margin-right: 8px;
+}
+
+.app-ml-base {
+    margin-left: 8px;
+}
+
+.app-mb-base {
+    margin-bottom: 8px;
+}
+
+.app-mt-base {
+    margin-top: 8px;
+}
+
+.app-flex-content-center {
+    justify-content: center;
+}
+
 .app-logo {
     padding: 10px;
     align-items: center;
@@ -115,3 +143,18 @@ i.app-logo {
 .app-pale:hover {
     box-shadow: 0 0 8px grey;
 }
+
+.app-round-btn {
+    border-radius: 999%;
+    font-size: 14px;
+    color: aliceblue;
+    background-color: var(--primary_color);
+    transition: 0.3s;
+    padding: 6px;
+}
+
+.app-round-btn:hover {
+    background-color: var(--readonly_color);
+}
+
+

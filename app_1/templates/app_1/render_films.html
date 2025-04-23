@@ -6,6 +6,8 @@
         >
             <span>
                 {{ film.name }}
+                <a href="{% url 'app-film-edit' film_id=film.id %}"><i class="fa fa-pencil"></i></a>
+                <a href="{% url 'app-film-delete' film_id=film.id %}"><i class="fa fa-trash"></i></a>
             </span>
         </a>
     {% endfor %}

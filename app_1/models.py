@@ -62,6 +62,7 @@ class Director(models.Model):
 class Film(models.Model):
     name = models.CharField(max_length=30)
     descriptions = models.TextField(null=True)
+    poster_url = models.TextField(null=True)
     genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
     director = models.ForeignKey(
         Director, on_delete=models.SET_NULL, null=True
@@ -69,3 +70,4 @@ class Film(models.Model):
 
     def __str__(self) -> str:
         return self.name
+

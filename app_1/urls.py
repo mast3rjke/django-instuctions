@@ -1,11 +1,32 @@
 from django.urls import path
 from . import views
 
+
+def _add_path(entity_name: str, operation_prefix: str):
+    url: str = f"{entity_name}/{operation_prefix}"
+
+    if operation_prefix != "create":
+        url += f"/<int:{entity_name}_id>"
+
+    return path(
+        url,
+        getattr(views, f"{operation_prefix}_{entity}"),
+        name=f"app-{entity}-{operation_prefix}"
+    )
+
+
 urlpatterns = [
     path("", views.main, name="app-main"),
-    path("about/", views.about, name="app-about"),
-    path("genres/", views.genres, name="app-genres"),
-    path("genre/<int:genre_id>", views.genre_view, name="app-genre-view"),
-    path("film/<int:film_id>", views.film_view, name="app-film-view"),
-    path("director/<int:director_id>", views.director_view, name="app-director-view"),
+    path("register/", views.register_view, name="app-register"),
+    path("login/", views.login_view, name="app-login"),
+    path("logout/", views.logout_view, name="app-logout"),
 ]
+
+entities: list[str] = ["genre", "film", "director"]
+operations: list[str] = ["view", "create", "edit", "delete"]
+
+for entity in entities:
+    for operation in operations:
+        urlpatterns.append(
+            _add_path(entity, operation)
+        )
